@@ -10,7 +10,6 @@ sys.path.append('..')
 import utils.file_util as fu
 from xml.dom.minidom import Document
 
-
 try:
     get_input = raw_input
 except NameError:
@@ -29,12 +28,6 @@ xmlfile = 'code.xml'
 xml_doc = Document()
 post_list = xml_doc.createElement('postlist')
 xml_doc.appendChild(post_list)
-
-
-def remove_file(filename):
-    if os.path.exists(filename):
-        os.remove(filename)
-
 
 '''
   fetch SO codes & save in xml file
@@ -68,7 +61,7 @@ if __name__ == '__main__':
     doc = fu.read_info('../data/android-2000/security_java_info.csv')
     # new_doc = open('../data/security_java_info.csv', 'w')
     index = 0
-    remove_file(xmlfile)
+    fu.remove_file(xmlfile)
     for line in doc:
         # if index > 10:
         #     break

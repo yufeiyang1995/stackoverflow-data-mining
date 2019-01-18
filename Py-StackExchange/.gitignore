@@ -16,3 +16,4 @@ data/
 *.zip
 *.model
 ._.DS_Store
+._*

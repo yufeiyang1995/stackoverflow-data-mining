@@ -31,6 +31,7 @@ def read_data(filename):
         temp += line.strip()
 
     return documents
+        
 
 def count_topics(model,corpus):
     topic_dict = {}
@@ -96,8 +97,30 @@ def lda_model(corpus,dictionary):
        # print topicStr
         
     count_topics(lda, corpus)
+    return lda
         #     print(lda.show_topic(id[0], topn=10))
             # print(lda.get_topic_terms(id[0], topn=10))
+
+def get_model(raw_document, topic_type, tf_idf_type):
+    regex = re.compile('([^\s\w]|_)+')
+    gen_docs = [[w.lower() for w in word_tokenize(regex.sub('', text).lower())] 
+            for text in raw_documents]
+    stop_words = list(set(stopwords.words('english')))
+    filter_docs = [[w for w in text if not w in stop_words and len(w) > 1 and "'" not in w and "`" not in w and not re.search(r'\d', w)]
+            for text in gen_docs]
+    dictionary = gensim.corpora.Dictionary(filter_docs)
+    corpus = [dictionary.doc2bow(filter_doc) for filter_doc in filter_docs]
+    if tf_idf_type == 1:
+        corpus = tf_idf(corpus, query_text)  
+    model = None
+    if topic_type == 1:
+        lsi(corpus, query_text)
+    elif topic_type == 2:
+        model = lda_model(corpus, dictionary)
+    else:
+        pass
+    
+
 
 def print_segment():
         print('--------------------\n')

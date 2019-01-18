@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 import sys
+import os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -13,8 +14,11 @@ def read_data(filename):
             documents.append(temp)
             temp = ''
             continue
-        temp += line.strip()
-    print(documents)
+        temp += line.strip() + ' '
+        if line.strip().endswith('##end##'):
+            documents.append(temp.replace('##end##',''))
+            temp = ''
+            continue
     return documents
 
 def read_info(filename):
@@ -43,3 +47,10 @@ def write_data(filename, *contents):
     f.write(string)
     f.close()
 
+def remove_file(filename):
+    if os.path.exists(filename):
+        os.remove(filename)
+
+def file_exist(filename):
+    print('search file: '+filename)
+    return os.path.exists(filename)
