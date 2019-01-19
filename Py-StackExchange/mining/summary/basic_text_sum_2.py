@@ -15,8 +15,6 @@ First Use Java Library 'PKUSUMSUM' to Implement
 Two Basic Summary Algorithms:
 Submodular1, Submodular2
 We Run It by Cmd...But It Produce Nothing.
-
-
 '''
 
 JAR_PATH = "/Volumes/YOUNG/Summary-Projects/PKUSUMSUM/PKUSUMSUM.jar"

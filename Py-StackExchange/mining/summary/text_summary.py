@@ -1,7 +1,11 @@
 import basic_text_sum_1 as b1
+from utils.textteaser import TextTeaser
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.stemmers import Stemmer
 from sumy.nlp.tokenizers import Tokenizer
+import sys
+sys.path.append('..')
+sys.path.append('../..')
 
 class Text_summary:
     def __init__(self):
@@ -12,28 +16,31 @@ class Text_summary:
     def text_sum_0(self, text):
         parser = PlaintextParser.from_string(text, Tokenizer(self.lauguage))
         stemmer = Stemmer(self.lauguage)
-        b1.lsa_summary(parser, stemmer)
+        b1.lsa_summary(parser, stemmer, self.sum_sentence_num)
 
     def text_sum_1(self, text):
-        pass
+        parser = PlaintextParser.from_string(text, Tokenizer(self.lauguage))
+        stemmer = Stemmer(self.lauguage)
+        b1.lex_rank_summary(parser, stemmer, self.sum_sentence_num)
 
     def text_sum_2(self, text):
-        print('text_sum_2')
-        pass
+        parser = PlaintextParser.from_string(text, Tokenizer(self.lauguage))
+        stemmer = Stemmer(self.lauguage)
+        b1.text_rank_summary(parser, stemmer, self.sum_sentence_num)
 
     def text_sum_3(self, text):
-        pass
+        parser = PlaintextParser.from_string(text, Tokenizer(self.lauguage))
+        stemmer = Stemmer(self.lauguage)
+        b1.sum_basic_summary(parser, stemmer, self.sum_sentence_num)
 
     def text_sum_4(self, text):
-        pass
+        tt = TextTeaser()
+        title = 'title'
+        sentences = tt.summarize(title, text, self.sum_sentence_num)
+        for sentence in sentences:
+            print(sentence)
 
     def text_sum_5(self, text):
-        pass
-
-    def text_sum_6(self, text):
-        pass
-    
-    def text_sum_7(self, text):
         pass
 
     def sum_default(self, text):
@@ -47,9 +54,7 @@ class Text_summary:
             2: self.text_sum_2,
             3: self.text_sum_3,
             4: self.text_sum_4,
-            5: self.text_sum_5,
-            6: self.text_sum_6,
-            7: self.text_sum_7
+            5: self.text_sum_5
         }
         switchDic.get(type, self.sum_default)(text)
 

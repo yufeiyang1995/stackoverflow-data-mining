@@ -22,7 +22,7 @@ LANGUAGE = "english"
 SENTENCES_COUNT = 5
 
 
-def lsa_summary(parser, stemmer):
+def lsa_summary(parser, stemmer, count):
     print('========== LSA ==========')
     summarizer = LsaSummarizer(stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
@@ -30,27 +30,27 @@ def lsa_summary(parser, stemmer):
         print(sentence)
 
 
-def lex_rank_summary(parser, stemmer):
+def lex_rank_summary(parser, stemmer, count):
     print('========== LEX_RANK ==========')
     summarizer = LexRankSummarizer(stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
-    for sentence in summarizer(parser.document, SENTENCES_COUNT):
+    for sentence in summarizer(parser.document, count):
         print(sentence)
 
 
-def text_rank_summary(parser, stemmer):
+def text_rank_summary(parser, stemmer, count):
     print('========== TEXT_RANK ==========')
     summarizer = TextRankSummarizer(stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
-    for sentence in summarizer(parser.document, SENTENCES_COUNT):
+    for sentence in summarizer(parser.document, count):
         print(sentence)
 
 
-def sum_basic_summary(parser, stemmer):
+def sum_basic_summary(parser, stemmer, count):
     print('========== SUM_BASIC ==========')
     summarizer = SumBasicSummarizer(Stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
-    for sentence in summarizer(parser.document, SENTENCES_COUNT):
+    for sentence in summarizer(parser.document, count):
         print(sentence)
 
 
@@ -68,7 +68,7 @@ As noted in the comments, it's possible that arrays being moved by the garbage c
 
     parser = PlaintextParser.from_string(text, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
-    lsa_summary(parser, stemmer)
-    lex_rank_summary(parser, stemmer)
-    text_rank_summary(parser, stemmer)
-    sum_basic_summary(parser, stemmer)
+    lsa_summary(parser, stemmer, SENTENCES_COUNT)
+    lex_rank_summary(parser, stemmer, SENTENCES_COUNT)
+    text_rank_summary(parser, stemmer, SENTENCES_COUNT)
+    sum_basic_summary(parser, stemmer, SENTENCES_COUNT)

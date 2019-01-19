@@ -26,7 +26,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "--tag", help="choose tag count: 1 - tagcount;", type=int)
     parser.add_argument("--summary", help="choose summary algorithm: 0 - LSA; 1 - LEX_RANK; \
-    2 - TEXT_RANK; 3 - SUM_BASIC; 4 - Submodular1; 5 - Submodular2; 6 - TextTeaser; 7 - MMR", type=int)
+    2 - TEXT_RANK; 3 - SUM_BASIC; 4 - TextTeaser; 5 - MMR", type=int)
     args = parser.parse_args()
     print(args)
     # check data is prepared
